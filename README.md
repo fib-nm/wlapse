@@ -8,6 +8,8 @@ wlapse
 
 There is no daemon, tray icon, or background process.
 
+![wlapse stopwatch demo](assets/wlapse.gif)
+
 ## Features
 
 - Displays elapsed time as `HH:MM:SS.t`.
