@@ -25,14 +25,27 @@ There is no daemon, tray icon, or background process.
 
 X11 and compositors without Layer Shell, including GNOME, are not supported.
 
-## Build and install
+## Install
+
+Download the archive for your architecture and `SHA256SUMS` from the
+[latest release](https://github.com/fib-nm/wlapse/releases/latest). Keep both files in the
+same directory, then verify and install the binary (replace `X.Y.Z` with the downloaded
+version):
+
+```sh
+sha256sum --check SHA256SUMS
+tar -xf wlapse-vX.Y.Z-x86_64-unknown-linux-gnu.tar.xz
+install -Dm755 wlapse-vX.Y.Z-x86_64-unknown-linux-gnu/wlapse "$HOME/.local/bin/wlapse"
+```
+
+Make sure `$HOME/.local/bin` is in `PATH`.
+
+### Build from source
 
 ```sh
 cargo build --release --locked
 install -Dm755 target/release/wlapse "$HOME/.local/bin/wlapse"
 ```
-
-Make sure `$HOME/.local/bin` is in `PATH`.
 
 ## Usage
 
