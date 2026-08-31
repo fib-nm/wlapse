@@ -15,34 +15,43 @@ There is no daemon, tray icon, or background process.
 - Can be moved by dragging it with the left mouse button.
 - Remembers its position between runs.
 - Supports custom background and text colors.
-- Works with Sway, Hyprland, Niri, KDE Plasma and other Wayland compositors that support Layer Shell.
+- Works with Sway, Hyprland, Niri and KDE Plasma.
 
 ## Requirements
 
 - Linux with an active Wayland session.
-- A compositor that supports `wlr-layer-shell` and `relative-pointer-v1`, such as Sway or Hyprland.
+- A compositor that supports `wlr-layer-shell` and `relative-pointer-v1`.
 - Rust 1.98 or newer and Cargo to build from source.
 
 X11 and compositors without Layer Shell, including GNOME, are not supported.
 
 ## Install
 
-Download the archive for your architecture and `SHA256SUMS` from the
-[latest release](https://github.com/fib-nm/wlapse/releases/latest). Keep both files in the
-same directory, then verify and install the binary (replace `X.Y.Z` with the downloaded
-version):
+Download the archive for your architecture from the
+[latest release](https://github.com/fib-nm/wlapse/releases/latest), then extract and install
+the binary (replace `X.Y.Z` with the downloaded version):
 
 ```sh
-sha256sum --check SHA256SUMS
 tar -xf wlapse-vX.Y.Z-x86_64-unknown-linux-gnu.tar.xz
 install -Dm755 wlapse-vX.Y.Z-x86_64-unknown-linux-gnu/wlapse "$HOME/.local/bin/wlapse"
 ```
 
 Make sure `$HOME/.local/bin` is in `PATH`.
 
+### Verify the download
+
+To verify the archive before extracting it, also download `SHA256SUMS` from the release,
+keep both files in the same directory, and run:
+
+```sh
+sha256sum --check SHA256SUMS
+```
+
 ### Build from source
 
 ```sh
+git clone https://github.com/fib-nm/wlapse.git
+cd wlapse
 cargo build --release --locked
 install -Dm755 target/release/wlapse "$HOME/.local/bin/wlapse"
 ```
