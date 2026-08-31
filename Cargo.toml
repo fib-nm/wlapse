@@ -1,0 +1,27 @@
+[package]
+name = "wlapse"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.98"
+description = "A lightweight, on-demand stopwatch overlay for Wayland"
+license = "MIT"
+repository = "https://github.com/fib_nm/wlapse"
+homepage = "https://github.com/fib_nm/wlapse"
+readme = "README.md"
+keywords = ["wayland", "stopwatch", "overlay", "layer-shell"]
+categories = ["command-line-utilities"]
+publish = false
+
+[dependencies]
+memmap2 = "0.9.8"
+rustix = { version = "1.1.4", features = ["event", "fs"] }
+signal-hook = "0.3.18"
+wayland-client = "0.31.15"
+wayland-protocols = { version = "0.32.13", features = ["client", "unstable"] }
+wayland-protocols-wlr = { version = "0.3.12", features = ["client"] }
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
