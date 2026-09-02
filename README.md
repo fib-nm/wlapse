@@ -29,6 +29,17 @@ X11 and compositors without Layer Shell, including GNOME, are not supported.
 
 ## Install
 
+### Arch Linux (AUR)
+
+Install the source-built [`wlapse`](https://aur.archlinux.org/packages/wlapse) package
+with an AUR helper such as `paru`:
+
+```sh
+paru -S wlapse
+```
+
+### Release archive
+
 Download the archive for your architecture from the
 [latest release](https://github.com/fib-nm/wlapse/releases/latest), then extract and install
 the binary (replace `X.Y.Z` with the downloaded version):
