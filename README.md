@@ -1,23 +1,17 @@
 # wlapse
 
-`wlapse` is a small stopwatch overlay for Wayland. Run the same command to show or stop it:
-
-```sh
-wlapse
-```
-
-There is no daemon, tray icon, or background process.
+A stopwatch overlay for Wayland that can be turned on and off with a keybind.
 
 ![wlapse stopwatch demo](assets/wlapse.gif)
 
-## Features
+## Key Features
 
-- Displays elapsed time as `HH:MM:SS.t`.
-- Stays above other windows.
+- Can be turned on and off with a keybind.
+- Doesn't require daemon or autostart.
 - Can be moved by dragging it with the left mouse button.
 - Remembers its position between runs.
 - Supports custom background and text colors.
-- Works with Sway, Hyprland, Niri and KDE Plasma.
+- Works with Sway, Hyprland, Niri, and KDE Plasma.
 
 ## Requirements
 
@@ -31,18 +25,17 @@ X11 and compositors without Layer Shell, including GNOME, are not supported.
 
 ### Arch Linux (AUR)
 
-Install the source-built [`wlapse`](https://aur.archlinux.org/packages/wlapse) package
-with an AUR helper such as `paru`:
+Install the official AUR package:
 
 ```sh
 paru -S wlapse
 ```
 
-### Release archive
+### Release
 
-Download the archive for your architecture from the
-[latest release](https://github.com/fib-nm/wlapse/releases/latest), then extract and install
-the binary (replace `X.Y.Z` with the downloaded version):
+Download the latest release from the
+[latest release](https://github.com/fib-nm/wlapse/releases/latest), then extract and
+install the binary (replace `X.Y.Z` with the downloaded version):
 
 ```sh
 tar -xf wlapse-vX.Y.Z-x86_64-unknown-linux-gnu.tar.xz
@@ -51,10 +44,8 @@ install -Dm755 wlapse-vX.Y.Z-x86_64-unknown-linux-gnu/wlapse "$HOME/.local/bin/w
 
 Make sure `$HOME/.local/bin` is in `PATH`.
 
-### Verify the download
-
-To verify the archive before extracting it, also download `SHA256SUMS` from the release,
-keep both files in the same directory, and run:
+To verify the archive before extracting it, also download `SHA256SUMS` from the
+release, keep both files in the same directory, and run:
 
 ```sh
 sha256sum --check SHA256SUMS
@@ -71,13 +62,45 @@ install -Dm755 target/release/wlapse "$HOME/.local/bin/wlapse"
 
 ## Usage
 
-Run `wlapse` to show the stopwatch:
+Bind the command `wlapse` to any unused key combination. The examples below use
+<kbd>Super</kbd>+<kbd>T</kbd>.
 
-```sh
-wlapse
+### Sway
+
+Add this to your Sway config:
+
+```text
+bindsym $mod+t exec wlapse
 ```
 
-Run it again to stop the stopwatch:
+### Hyprland
+
+Add this to `hyprland.lua`:
+
+```lua
+hl.bind("SUPER + T", hl.dsp.exec_cmd("wlapse"))
+```
+
+### Niri
+
+Add this inside the `binds` section of your Niri config:
+
+```kdl
+Mod+T { spawn "wlapse"; }
+```
+
+### KDE Plasma
+
+Open **System Settings → Keyboard → Shortcuts**, choose
+**Add New → Command or Script**, enter `wlapse` as the command, and assign your
+preferred shortcut.
+
+Reload your compositor configuration if it does not apply the new binding
+automatically.
+
+### Command line
+
+You can also invoke the same command from a terminal for testing:
 
 ```sh
 wlapse
@@ -90,34 +113,27 @@ wlapse --help
 wlapse --version
 ```
 
-Sway key binding:
-
-```text
-bindsym $mod+<key> exec wlapse
-```
-
-Hyprland 0.55+ key binding (`hyprland.lua`):
-
-```lua
-hl.bind("SUPER + <key>", hl.dsp.exec_cmd("wlapse"))
-```
-
 ## Colors
 
-To change the colors, create `$XDG_CONFIG_HOME/wlapse/config`. If `XDG_CONFIG_HOME` is not set, use `$HOME/.config/wlapse/config`.
+To change the colors, create `$XDG_CONFIG_HOME/wlapse/config`. If `XDG_CONFIG_HOME`
+is not set, use `$HOME/.config/wlapse/config`.
 
 ```ini
 background_color = #202229d9
 text_color = #ffffff
 ```
 
-Colors can use `#RRGGBB` or `#RRGGBBAA`. The optional alpha value controls transparency. Missing settings use the default colors, and lines starting with `#` are ignored as comments.
+Colors can use `#RRGGBB` or `#RRGGBBAA`. The optional alpha value controls
+transparency. Missing settings use the default colors, and lines starting with `#`
+are ignored as comments.
 
-Changes take effect the next time the stopwatch starts. An invalid setting is reported as an error instead of being ignored.
+Changes take effect the next time the stopwatch starts. An invalid setting is
+reported as an error instead of being ignored.
 
 ## Moving the stopwatch
 
-Drag the overlay with the left mouse button. `wlapse` saves the new position when you release the button.
+Drag the overlay with the left mouse button. `wlapse` saves the new position when
+you release the button.
 
 To reset the position, stop `wlapse` and delete:
 
@@ -133,9 +149,10 @@ $HOME/.local/state/wlapse/placement
 
 ### Lag while dragging in Hyprland
 
-Hyprland may animate the overlay while it is being moved, which makes it lag behind the pointer. Disable animation for `wlapse` to fix this.
+Hyprland may animate the overlay while it is being moved, which makes it lag behind
+the pointer. Disable animation for `wlapse` to fix this.
 
-For Hyprland 0.55 and newer, add this to `hyprland.lua`:
+Add this to `hyprland.lua`:
 
 ```lua
 hl.layer_rule({
@@ -143,12 +160,6 @@ hl.layer_rule({
     match = { namespace = "^wlapse$" },
     no_anim = true,
 })
-```
-
-For Hyprland 0.54 and older, add this to the legacy configuration:
-
-```ini
-layerrule = noanim, ^(wlapse)$
 ```
 
 ## License
