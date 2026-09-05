@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=wlapse
+Comment=A lightweight, on-demand stopwatch overlay for Wayland
+Exec=wlapse
+Icon=wlapse
+Categories=Utility;
+Terminal=false

@@ -31,6 +31,24 @@ Install the official AUR package:
 paru -S wlapse
 ```
 
+### AppImage
+
+Download the x86_64 AppImage from the
+[latest release](https://github.com/fib-nm/wlapse/releases/latest), then install it
+for your user (replace `X.Y.Z` with the downloaded version):
+
+```sh
+install -Dm755 wlapse-vX.Y.Z-x86_64.AppImage "$HOME/.local/bin/wlapse"
+```
+
+Make sure `$HOME/.local/bin` is in `PATH`. To update wlapse later, replace this file
+with the AppImage from the newer release. Running an AppImage normally requires
+FUSE. On systems where FUSE is unavailable, use its extraction fallback:
+
+```sh
+APPIMAGE_EXTRACT_AND_RUN=1 wlapse
+```
+
 ### Release
 
 Download the latest release from the
@@ -44,11 +62,11 @@ install -Dm755 wlapse-vX.Y.Z-x86_64-unknown-linux-gnu/wlapse "$HOME/.local/bin/w
 
 Make sure `$HOME/.local/bin` is in `PATH`.
 
-To verify the archive before extracting it, also download `SHA256SUMS` from the
-release, keep both files in the same directory, and run:
+To verify an AppImage or archive before installing it, also download `SHA256SUMS`
+from the release, keep it beside the downloaded file, and run:
 
 ```sh
-sha256sum --check SHA256SUMS
+sha256sum --check --ignore-missing SHA256SUMS
 ```
 
 ### Build from source
