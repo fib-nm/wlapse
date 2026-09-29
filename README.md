@@ -11,15 +11,43 @@ A stopwatch overlay for Wayland that can be turned on and off with a keybind.
 - Can be moved by dragging it with the left mouse button.
 - Remembers its position between runs.
 - Supports custom background and text colors.
-- Works with Sway, Hyprland, Niri, and KDE Plasma.
 
 ## Requirements
 
 - Linux with an active Wayland session.
-- A compositor that supports `wlr-layer-shell` and `relative-pointer-v1`.
+- A compositor that supports both `wlr-layer-shell` and `relative-pointer-v1`.
 - Rust 1.98 or newer and Cargo to build from source.
 
-X11 and compositors without Layer Shell, including GNOME, are not supported.
+X11 is not supported.
+
+## Compositor compatibility
+
+`wlapse` requires both [`wlr-layer-shell`](https://wayland.app/protocols/wlr-layer-shell-unstable-v1) and [`relative-pointer-v1`](https://wayland.app/protocols/relative-pointer-unstable-v1). If either protocol is missing, `wlapse` will not work.
+
+| Compositor | `wlr-layer-shell` | `relative-pointer-v1` | `wlapse` |
+|---|:---:|:---:|:---:|
+| COSMIC compositor (COSMIC) | Yes | Yes | Supported |
+| dwl | Yes | Yes | Supported |
+| Gamescope | Yes | Yes | Supported |
+| Hyprland | Yes | Yes | Supported |
+| Jay | Yes | Yes | Supported |
+| KWin (KDE Plasma) | Yes | Yes | Supported |
+| Labwc | Yes | Yes | Supported |
+| Louvre | Yes | Yes | Supported |
+| Mir | Yes | Yes | Supported |
+| Muffin (Cinnamon) | Yes | Yes | Supported |
+| niri | Yes | Yes | Supported |
+| phoc (Phosh) | Yes | Yes | Supported |
+| river | Yes | Yes | Supported |
+| Sway | Yes | Yes | Supported |
+| SwayFX | Yes | Yes | Supported |
+| Wayfire | Yes | Yes | Supported |
+| Cage | No | Yes | Not supported |
+| Mutter (GNOME) | No | Yes | Not supported |
+| Treeland (DDE) | Yes | No | Not supported |
+| Weston | No | Yes | Not supported |
+
+The table is based on compositor protocol support rather than per-compositor integration code in `wlapse`. Protocol support can change between compositor versions.
 
 ## Install
 
